@@ -11,6 +11,15 @@ using System.IO;
 
 namespace Riceshower
 {
+    public static class common
+    {
+        private static string path ;
+        public static string Path
+        {
+            get { return path; }
+            set { path = value; }
+        }
+    }
     public partial class Form1 : Form
     {
         public Form1()
@@ -31,8 +40,7 @@ namespace Riceshower
             dialog.Filter = "*.txt";
             if (dialog.ShowDialog() == DialogResult.OK || dialog.ShowDialog() == DialogResult.Yes)
             {
-                string path;
-                string[] accounts = File.ReadAllLines(path);
+                string[] accounts = File.ReadAllLines(common.Path);
             }
             
 
