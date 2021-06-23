@@ -39,6 +39,7 @@ namespace Riceshower
             this.lbl_text_num = new System.Windows.Forms.Label();
             this.btn_previous = new System.Windows.Forms.Button();
             this.btn_next = new System.Windows.Forms.Button();
+            this.btn_save = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -80,10 +81,11 @@ namespace Riceshower
             this.btn_proofreading_submit.TabIndex = 4;
             this.btn_proofreading_submit.Text = "Proofreading Submit";
             this.btn_proofreading_submit.UseVisualStyleBackColor = true;
+            this.btn_proofreading_submit.Click += new System.EventHandler(this.btn_proofreading_submit_Click);
             // 
             // btn_load
             // 
-            this.btn_load.Location = new System.Drawing.Point(771, 54);
+            this.btn_load.Location = new System.Drawing.Point(679, 54);
             this.btn_load.Name = "btn_load";
             this.btn_load.Size = new System.Drawing.Size(101, 74);
             this.btn_load.TabIndex = 5;
@@ -128,12 +130,24 @@ namespace Riceshower
             this.btn_next.TabIndex = 9;
             this.btn_next.Text = "Next";
             this.btn_next.UseVisualStyleBackColor = true;
+            this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
+            // 
+            // btn_save
+            // 
+            this.btn_save.Location = new System.Drawing.Point(861, 54);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(101, 74);
+            this.btn_save.TabIndex = 10;
+            this.btn_save.Text = "Save";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 519);
+            this.Controls.Add(this.btn_save);
             this.Controls.Add(this.btn_next);
             this.Controls.Add(this.btn_previous);
             this.Controls.Add(this.lbl_text_num);
@@ -164,6 +178,7 @@ namespace Riceshower
         private System.Windows.Forms.Label lbl_text_num;
         private System.Windows.Forms.Button btn_previous;
         private System.Windows.Forms.Button btn_next;
+        private System.Windows.Forms.Button btn_save;
     }
 }
 

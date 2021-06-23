@@ -1,0 +1,12 @@
+C:\Users\User\source\repos\Riceshower\bin\Debug\Riceshower.exe.config
+C:\Users\User\source\repos\Riceshower\bin\Debug\Riceshower.exe
+C:\Users\User\source\repos\Riceshower\bin\Debug\Riceshower.pdb
+C:\Users\User\source\repos\Riceshower\bin\Debug\System.Data.SQLite.dll
+C:\Users\User\source\repos\Riceshower\obj\Debug\Riceshower.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\Riceshower\obj\Debug\Riceshower.common.resources
+C:\Users\User\source\repos\Riceshower\obj\Debug\Riceshower.Properties.Resources.resources
+C:\Users\User\source\repos\Riceshower\obj\Debug\Riceshower.csproj.GenerateResource.cache
+C:\Users\User\source\repos\Riceshower\obj\Debug\Riceshower.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\Riceshower\obj\Debug\Riceshower.csproj.CopyComplete
+C:\Users\User\source\repos\Riceshower\obj\Debug\Riceshower.exe
+C:\Users\User\source\repos\Riceshower\obj\Debug\Riceshower.pdb
