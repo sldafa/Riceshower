@@ -24,43 +24,60 @@ namespace Riceshower
         {
 
         }
-
         public class sql
         {
-            private string text;
-            public string load 
-            { 
-                get 
+            //Database initialize.
+            public static bool sqlInitialize(string filepath)
+            {                
+                SQLiteConnection dbConnection;
+                if(!File.Exists(filepath))
                 {
-                    return "1";
-                } 
-                set 
-                {
-                    text = value;
-                } 
+                    //Show a warning dialog box.
+
+                    return false;
+                }
+                SQLiteConnection.CreateFile("tmp.sqlite");
+
+                dbConnection = new SQLiteConnection("Data Source = tmp.sqlite; Version = 3; UTF8Encoding = true;");
+                dbConnection.Open();
+
+                //Create table.
+                string sql = "create table texts (id int, txtOrigin varchar(255), txtTrans varchar(255), txtProof varchar(255)";
+                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                command.ExecuteNonQuery();
+
+                //Read file to database.
+
+
+                return true;
             }
-            public Boolean save { get; set; }
+
+            //Save changes to database.
+            public static void save()
+            {
+
+            }
         }
 
         //Load button. Click and open file dialog box.
         private void btn_load_Click(object sender, EventArgs e)
         {
             //Select txt file in the dialog box.
-            string path = "";
             OpenFileDialog dialog = new OpenFileDialog();
+            string path = "";
             dialog.Multiselect = false;
             dialog.Title = "Select text file";
-            dialog.Filter = "*.txt";
+            dialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             if (dialog.ShowDialog() == DialogResult.OK || dialog.ShowDialog() == DialogResult.Yes)
             {
-                path = dialog.FileName;
+               path = dialog.FileName;
             }
+            //Show the path in label2.
+            lbl_directory.Text = path;
+            //Import txt file to SQL.
+            sql.sqlInitialize(path);
 
-            //Connect to the database.
-
-            //Read text file. Then save it in the tmp SQL.
-
-            //Load SQL. Display the text in textbox.
+            //Load SQL. Display the text in textbox. Show text No. in label1.
         }
 
         //Save the translation text to SQL.
@@ -87,12 +104,15 @@ namespace Riceshower
 
         }
 
-        //Save button. Click and output SQL to txt.
-        private void btn_save_Click(object sender, EventArgs e)
+        //Output button. Click and output SQL to txt.
+        private void btn_output_Click(object sender, EventArgs e)
         {
 
         }
 
-        
+        private void lbl_directory_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
