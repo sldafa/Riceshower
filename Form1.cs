@@ -32,8 +32,6 @@ namespace Riceshower
                 SQLiteConnection dbConnection;
                 if(!File.Exists(filepath))
                 {
-                    //Show a warning dialog box.
-
                     return false;
                 }
                 SQLiteConnection.CreateFile("tmp.sqlite");
@@ -68,10 +66,16 @@ namespace Riceshower
             dialog.Multiselect = false;
             dialog.Title = "Select text file";
             dialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            if (dialog.ShowDialog() == DialogResult.OK || dialog.ShowDialog() == DialogResult.Yes)
+
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
                path = dialog.FileName;
             }
+            else
+            {
+                MessageBox.Show("Operation Cancelled.");
+            }
+
             //Show the path in label2.
             lbl_directory.Text = path;
             //Import txt file to SQL.
