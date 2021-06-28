@@ -32,6 +32,7 @@ namespace Riceshower
                 SQLiteConnection dbConnection;
                 if(!File.Exists(filepath))
                 {
+                    MessageBox.Show("Path Invalid!");
                     return false;
                 }
                 SQLiteConnection.CreateFile("tmp.sqlite");
@@ -40,21 +41,32 @@ namespace Riceshower
                 dbConnection.Open();
 
                 //Create table.
-                string sql = "create table texts (id int, txtOrigin varchar(255), txtTrans varchar(255), txtProof varchar(255)";
-                SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
+                string sqlCreate = "create table texts (id int, txtOrigin varchar(255), txtTrans varchar(255), txtProof varchar(255), is_edit bool, is_trans bool. is_proof bool)";
+                SQLiteCommand command = new SQLiteCommand(sqlCreate, dbConnection);
                 command.ExecuteNonQuery();
 
                 //Read file to database.
-
+                string sqlFill = "";
 
                 return true;
             }
 
             //Save changes to database.
-            public static void save()
+            public static void save(string text, string field)
             {
 
             }
+
+            public static void load(string text, string field)
+            {
+                
+            }
+
+            public static void output(string filepath)
+            {
+
+            }
+
         }
 
         //Load button. Click and open file dialog box.
@@ -79,39 +91,46 @@ namespace Riceshower
             //Show the path in label2.
             lbl_directory.Text = path;
             //Import txt file to SQL.
-            sql.sqlInitialize(path);
-
-            //Load SQL. Display the text in textbox. Show text No. in label1.
+            bool sqlStatus = sql.sqlInitialize(path);
+            if (sqlStatus)
+            {
+                //Operation begin.
+                //Load SQL. Display the text in textbox. Show text No. in label1.
+            }
+            else
+            {
+                MessageBox.Show("Database Initialize failed.");
+            }
         }
 
         //Save the translation text to SQL.
         private void btn_translation_submit_Click(object sender, EventArgs e)
         {
-
+            sql.save("","");
         }
 
         //Save the proofread text to SQL.
         private void btn_proofreading_submit_Click(object sender, EventArgs e)
         {
-
+            sql.save("","");
         }
 
         //Load the previous line.
         private void btn_previous_Click(object sender, EventArgs e)
         {
-
+            sql.load("","");
         }
 
         //Load the next line.
         private void btn_next_Click(object sender, EventArgs e)
         {
-
+            sql.load("","");
         }
 
         //Output button. Click and output SQL to txt.
         private void btn_output_Click(object sender, EventArgs e)
         {
-
+            sql.output("");
         }
 
         private void lbl_directory_Click(object sender, EventArgs e)
