@@ -35,20 +35,32 @@ namespace Riceshower
                     MessageBox.Show("Path Invalid!");
                     return false;
                 }
-                SQLiteConnection.CreateFile("tmp.sqlite");
 
-                dbConnection = new SQLiteConnection("Data Source = tmp.sqlite; Version = 3; UTF8Encoding = true;");
-                dbConnection.Open();
+                //If sqlite file does not exist, create text-tmp.sqlite.
+                string sqlpath = "";
+                if(!File.Exists(sqlpath))
+                {
+                    SQLiteConnection.CreateFile("tmp.sqlite");
 
-                //Create table.
-                string sqlCreate = "create table texts (id int, txtOrigin varchar(255), txtTrans varchar(255), txtProof varchar(255), is_edit bool, is_trans bool. is_proof bool)";
-                SQLiteCommand command = new SQLiteCommand(sqlCreate, dbConnection);
-                command.ExecuteNonQuery();
+                    dbConnection = new SQLiteConnection("Data Source = tmp.sqlite; Version = 3; UTF8Encoding = true;");
+                    dbConnection.Open();
 
-                //Read file to database.
-                string sqlFill = "";
+                    //Create table.
+                    string sqlCreate = "create table texts (id int, txtOrigin varchar(255), txtTrans varchar(255), txtProof varchar(255), is_edit bool, is_trans bool, is_proof bool, PRIMARY KEY(id))";
+                    SQLiteCommand command = new SQLiteCommand(sqlCreate, dbConnection);
+                    command.ExecuteNonQuery();
 
-                return true;
+                    //Read file to database.
+                    string sqlFill = "";
+
+                    return true;
+                }
+
+                //If sqlite file already exists, read it and point to last edit row.
+                else
+                {
+                    return true;
+                }
             }
 
             //Save changes to database.
