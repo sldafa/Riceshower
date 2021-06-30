@@ -36,13 +36,13 @@ namespace Riceshower
                     return false;
                 }
 
-                //If sqlite file does not exist, create text-tmp.sqlite.
-                string sqlpath = "";
-                if(!File.Exists(sqlpath))
+                //If sqlite file does not exist, create .sqlite file.
+                string sqlFileName = Path.GetFileNameWithoutExtension(filepath) + ".sqlite";
+                if(!File.Exists(sqlFileName))
                 {
-                    SQLiteConnection.CreateFile("tmp.sqlite");
+                    SQLiteConnection.CreateFile(sqlFileName);
 
-                    dbConnection = new SQLiteConnection("Data Source = tmp.sqlite; Version = 3; UTF8Encoding = true;");
+                    dbConnection = new SQLiteConnection("Data Source = "+sqlFileName+"; Version = 3; UTF8Encoding = true;");
                     dbConnection.Open();
 
                     //Create table.
@@ -50,20 +50,25 @@ namespace Riceshower
                     SQLiteCommand command = new SQLiteCommand(sqlCreate, dbConnection);
                     command.ExecuteNonQuery();
 
-                    //Read file to database.
-                    string sqlFill = "";
+                    //**Read file to database. **Needs sample file.
+                    string[] textArray = File.ReadAllLines(filepath);
+                    for(int i = 1; textArray[i] == null; i++)
+                    {
+                        string sqlRow;
+                        string sqlFill = "";
+                    }
 
                     return true;
                 }
 
-                //If sqlite file already exists, read it and point to last edit row.
+                //**If sqlite file already exists, read it and point to last edit row.
                 else
                 {
                     return true;
                 }
             }
 
-            //Save changes to database.
+            //**Save changes to database.
             public static void save(string text, string field)
             {
 
@@ -102,7 +107,8 @@ namespace Riceshower
 
             //Show the path in label2.
             lbl_directory.Text = path;
-            //Import txt file to SQL.
+
+            //**Import txt file to SQL.
             bool sqlStatus = sql.sqlInitialize(path);
             if (sqlStatus)
             {
@@ -115,31 +121,31 @@ namespace Riceshower
             }
         }
 
-        //Save the translation text to SQL.
+        //**Save the translation text to SQL.
         private void btn_translation_submit_Click(object sender, EventArgs e)
         {
             sql.save("","");
         }
 
-        //Save the proofread text to SQL.
+        //**Save the proofread text to SQL.
         private void btn_proofreading_submit_Click(object sender, EventArgs e)
         {
             sql.save("","");
         }
 
-        //Load the previous line.
+        //**Load the previous line.
         private void btn_previous_Click(object sender, EventArgs e)
         {
             sql.load("","");
         }
 
-        //Load the next line.
+        //**Load the next line.
         private void btn_next_Click(object sender, EventArgs e)
         {
             sql.load("","");
         }
 
-        //Output button. Click and output SQL to txt.
+        //**Output button. Click and output SQL to txt.
         private void btn_output_Click(object sender, EventArgs e)
         {
             sql.output("");
