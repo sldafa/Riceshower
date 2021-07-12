@@ -46,32 +46,48 @@ namespace Riceshower
                     dbConnection.Open();
 
                     //Create table.
-                    string sqlCreate = "create table texts (id int, txtOrigin varchar(255), txtTrans varchar(255), txtProof varchar(255), is_edit bool, is_trans bool, is_proof bool, PRIMARY KEY(id))";
+                    string sqlCreate = "create table texts (id int, txtOrigin varchar(255), txtTrans varchar(255), txtProof varchar(255), is_edit bool, is_trans bool, is_proof bool)";
                     SQLiteCommand command = new SQLiteCommand(sqlCreate, dbConnection);
                     command.ExecuteNonQuery();
 
-                    //**Read file to database. **Needs sample file.
-                    string[] textArray = File.ReadAllLines(filepath);
-                    for(int i = 1; textArray[i] == null; i++)
+                    //**Read file to database.
+                    string[] textArray = File.ReadAllLines(filepath,Encoding.UTF8);
+                    for (int i = 0; textArray[i] == null; i++)
                     {
-                        string sqlRow;
                         string sqlFill = "";
-                    }
+                        string[] sqlUnit = null;
+                            sqlUnit[i%9] = textArray[i];
+                        if (i%9 == 1 && i !=1)
+                            sqlFill = "insert into texts values(\" " + sqlUnit[0] + "\" , \"" + sqlUnit[2] + "\",\"" + sqlUnit[4] + "\",\"" + sqlUnit[6] + "\",false, false, false)";
 
+
+                        SQLiteCommand insertCommand = new SQLiteCommand(sqlFill, dbConnection);
+                        insertCommand.ExecuteNonQuery();
+                    }
                     return true;
                 }
 
                 //**If sqlite file already exists, read it and point to last edit row.
                 else
                 {
+                    dbConnection = new SQLiteConnection("Data Source = " + sqlFileName + "; Version = 3; UTF8Encoding = true;");
+                    dbConnection.Open();
+
+
+
+
                     return true;
                 }
+
+                dbConnection.Close();
+
+                //**Show pointed text in textbox.
             }
 
             //**Save changes to database.
             public static void save(string text, string field)
             {
-
+                
             }
 
             public static void load(string text, string field)
